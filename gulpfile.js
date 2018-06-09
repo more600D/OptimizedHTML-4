@@ -12,6 +12,7 @@ var gulp          = require('gulp'),
 		notify        = require("gulp-notify"),
 		rsync         = require('gulp-rsync'),
 		pug						= require('gulp-pug');
+		plumber				= require('gulp-plumber');
 
 gulp.task('browser-sync', function() {
 	browserSync({
@@ -27,6 +28,7 @@ gulp.task('browser-sync', function() {
 
 gulp.task('styles', function() {
 	return gulp.src('app/'+syntax+'/**/*.'+syntax+'')
+	.pipe(plumber())
 	.pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
 	.pipe(rename({ suffix: '.min', prefix : '' }))
 	.pipe(autoprefixer(['last 15 versions']))
@@ -72,8 +74,10 @@ gulp.task('run', ['watch']);
 
 gulp.task('pug', function(){
 	return gulp.src('./app/pug/*.pug')
+		.pipe(plumber())
 		.pipe(pug({
 			pretty: true	
 		}))
-		.pipe(gulp.dest('./app'));
+		.pipe(gulp.dest('./app'))
+		.on('end', browserSync.reload);
 });
