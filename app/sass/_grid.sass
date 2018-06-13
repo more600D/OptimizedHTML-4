@@ -8,7 +8,6 @@
 		clear: both
 =width($part)
 	width: 100% / $part
-	float: left
 =off($part)
 	margin-left: 100% / $grid-columns * $part
 
@@ -23,6 +22,18 @@
 	margin: 0 (-$gutter / 2)
 	position: relative
 	+clearfix
+.items
+	position: relative
+	padding: 0 ($gutter / 2)
+	margin: ($gutter / 2) 0
+	float: left
+	box-sizing: border-box
+	+clearfix
+	.item
+		background: #ffffff
+		border-radius: 3px
+		padding: 5px
+		text-align: center
 
 //Блоки
 .full
@@ -39,3 +50,11 @@
 	+off(1)
 .off-2
 	+off(2)
+.off-3
+	+off(3)
+.off-4
+	+off(4)
+.off-5
+	+off(5)
+.off-6
+	+off(6)
